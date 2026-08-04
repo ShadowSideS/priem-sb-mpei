@@ -85,24 +85,47 @@ def render_html(summary: pd.DataFrame, updated_at: datetime) -> str:
 :root {{ color-scheme: light; }}
 * {{ box-sizing: border-box; }}
 body {{ font-family: Arial, sans-serif; margin: 0; background: #f4f6f8; color: #1f2937; }}
-.wrap {{ max-width: 1220px; margin: 36px auto; padding: 0 18px; }}
-.card {{ background: #fff; border-radius: 14px; padding: 24px; box-shadow: 0 4px 18px rgba(0,0,0,.08); }}
-h1 {{ margin: 0 0 12px; font-size: 28px; }}
-.meta {{ color: #4b5563; margin-bottom: 18px; line-height: 1.6; }}
-.actions {{ margin-bottom: 18px; }}
-.button {{ display: inline-block; border-radius: 8px; padding: 11px 16px; font-weight: 700; text-decoration: none; background: #475569; color: #fff; }}
-.table-wrap {{ overflow-x: auto; }}
-table {{ width: 100%; border-collapse: collapse; background: #fff; }}
-th, td {{ border: 1px solid #cbd5e1; padding: 10px 12px; text-align: center; }}
+.wrap {{ width: 100%; max-width: 1400px; margin: 18px auto; padding: 0 10px; }}
+.card {{ background: #fff; border-radius: 12px; padding: 18px; box-shadow: 0 3px 14px rgba(0,0,0,.07); }}
+h1 {{ margin: 0 0 8px; font-size: 25px; line-height: 1.15; }}
+.meta {{ color: #4b5563; margin-bottom: 12px; line-height: 1.35; font-size: 14px; }}
+.actions {{ margin-bottom: 12px; }}
+.button {{ display: inline-block; border-radius: 7px; padding: 9px 13px; font-size: 14px; font-weight: 700; text-decoration: none; background: #475569; color: #fff; }}
+.table-wrap {{ width: 100%; overflow-x: auto; }}
+table {{ width: 100%; table-layout: fixed; border-collapse: collapse; background: #fff; }}
+th, td {{ border: 1px solid #cbd5e1; padding: 8px 9px; text-align: center; line-height: 1.2; overflow-wrap: anywhere; }}
 th {{ background: #d9eaf7; font-weight: 700; }}
-th:first-child, td:first-child {{ text-align: left; }}
+th:nth-child(1), td:nth-child(1) {{ width: 56%; text-align: left; }}
+th:nth-child(2), td:nth-child(2) {{ width: 13%; }}
+th:nth-child(3), td:nth-child(3) {{ width: 13%; }}
+th:nth-child(4), td:nth-child(4) {{ width: 18%; }}
 tr.total td {{ background: #fff2cc; font-weight: 700; }}
-.note {{ margin-top: 14px; color: #64748b; font-size: 13px; line-height: 1.5; }}
+.note {{ margin-top: 10px; color: #64748b; font-size: 12px; line-height: 1.35; }}
+.mobile-label {{ display: none; }}
 @media (max-width: 700px) {{
-  .wrap {{ margin: 12px auto; padding: 0 8px; }}
-  .card {{ padding: 14px; border-radius: 10px; }}
-  h1 {{ font-size: 22px; }}
-  th, td {{ padding: 8px; font-size: 14px; }}
+  body {{ background: #fff; }}
+  .wrap {{ margin: 0; padding: 0; max-width: none; }}
+  .card {{ padding: 8px 5px 10px; border-radius: 0; box-shadow: none; }}
+  h1 {{ margin-bottom: 5px; font-size: 17px; }}
+  .meta {{ margin-bottom: 7px; font-size: 10.5px; line-height: 1.25; }}
+  .actions {{ margin-bottom: 7px; }}
+  .button {{ padding: 6px 9px; border-radius: 5px; font-size: 11px; }}
+  .table-wrap {{ overflow-x: visible; }}
+  table {{ font-size: 10px; }}
+  th, td {{ padding: 4px 3px; line-height: 1.12; }}
+  th:nth-child(1), td:nth-child(1) {{ width: 55%; }}
+  th:nth-child(2), td:nth-child(2) {{ width: 14%; }}
+  th:nth-child(3), td:nth-child(3) {{ width: 14%; }}
+  th:nth-child(4), td:nth-child(4) {{ width: 17%; }}
+  .desktop-label {{ display: none; }}
+  .mobile-label {{ display: inline; }}
+  .note {{ margin-top: 7px; font-size: 9.5px; }}
+}}
+@media (max-width: 390px) {{
+  .card {{ padding-left: 3px; padding-right: 3px; }}
+  h1 {{ font-size: 16px; }}
+  table {{ font-size: 9px; }}
+  th, td {{ padding: 3px 2px; }}
 }}
 </style>
 </head>
@@ -119,9 +142,9 @@ tr.total td {{ background: #fff2cc; font-weight: 700; }}
 <div class="table-wrap"><table>
 <thead><tr>
 <th>Направление</th>
-<th>Основной конкурс</th>
-<th>Переполнение</th>
-<th>Минимальный балл основного конкурса</th>
+<th><span class="desktop-label">Основной конкурс</span><span class="mobile-label">Основной</span></th>
+<th><span class="desktop-label">Переполнение</span><span class="mobile-label">Переполн.</span></th>
+<th><span class="desktop-label">Минимальный балл основного конкурса</span><span class="mobile-label">Мин. балл</span></th>
 </tr></thead>
 <tbody>{''.join(rows_html)}</tbody>
 </table></div>
