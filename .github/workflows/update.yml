@@ -1,0 +1,61 @@
+name: Обновить сводку МЭИ
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+  schedule:
+    # GitHub использует UTC. Смещение здесь неважно: запуск идёт каждые 15 минут.
+    # Минуты выбраны не круглыми, чтобы снизить вероятность задержки в часы нагрузки.
+    - cron: "7,22,37,52 * * * *"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Скачать файлы репозитория
+        uses: actions/checkout@v6
+
+      - name: Установить Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Установить библиотеки
+        run: pip install -r requirements.txt
+
+      - name: Установить Chromium для Playwright
+        run: python -m playwright install --with-deps chromium
+
+      - name: Собрать страницу и Excel
+        run: python generate_site.py
+
+      - name: Настроить GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Загрузить файлы страницы
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Опубликовать GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
