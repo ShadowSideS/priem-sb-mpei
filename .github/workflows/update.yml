@@ -34,7 +34,7 @@ jobs:
       - name: Установить Chromium для Playwright
         run: python -m playwright install --with-deps chromium
 
-            - name: Собрать страницу и Excel
+      - name: Собрать страницу и Excel
         run: python generate_site.py
 
       - name: Добавить favicon
