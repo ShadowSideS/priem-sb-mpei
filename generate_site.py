@@ -77,6 +77,9 @@ def render_html(summary: pd.DataFrame, updated_at: datetime) -> str:
     return f"""<!doctype html>
 <html lang="ru">
 <head>
+<meta name="theme-color" content="#FA8072">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="shortcut icon" href="favicon.svg">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="refresh" content="300">
@@ -126,6 +129,93 @@ tr.total td {{ background: #fff2cc; font-weight: 700; }}
   h1 {{ font-size: 16px; }}
   table {{ font-size: 9px; }}
   th, td {{ padding: 3px 2px; }}
+}}
+:root {{
+    --salmon: #FA8072;
+    --salmon-dark: #D96558;
+    --salmon-soft: #F7B2A8;
+    --salmon-pale: #FFF2EE;
+    --salmon-row: #FFF8F6;
+    --salmon-border: #EFC7C0;
+    --text-main: #4D2925;
+    --text-muted: #87605A;
+}}
+
+body {{
+    background: var(--salmon-pale);
+    color: var(--text-main);
+}}
+
+.card {{
+    background: #fffaf8;
+    border: 1px solid var(--salmon-border);
+    box-shadow: 0 3px 14px rgba(217, 101, 88, 0.16);
+}}
+
+h1,
+h2,
+h3 {{
+    color: var(--salmon-dark);
+}}
+
+button,
+.btn,
+.button,
+.download-btn,
+.download-button,
+a.btn,
+a.button {{
+    background: var(--salmon);
+    color: #ffffff;
+    border-color: var(--salmon);
+}}
+
+button:hover,
+.btn:hover,
+.button:hover,
+.download-btn:hover,
+.download-button:hover,
+a.btn:hover,
+a.button:hover {{
+    background: var(--salmon-dark);
+    border-color: var(--salmon-dark);
+}}
+
+table {{
+    background: #ffffff;
+    border-color: var(--salmon-border);
+}}
+
+thead,
+th {{
+    background: var(--salmon-soft);
+    color: var(--text-main);
+    border-color: var(--salmon-border);
+}}
+
+td {{
+    border-color: var(--salmon-border);
+}}
+
+tbody tr:nth-child(even) {{
+    background: var(--salmon-row);
+}}
+
+tbody tr:hover {{
+    background: #FFE5DF;
+}}
+
+.total-row,
+tr.total {{
+    background: #FFDCD5;
+}}
+
+.updated,
+.timestamp,
+.subtitle,
+.note,
+.footer {{
+    color: var(--text-muted);
 }}
 </style>
 </head>
