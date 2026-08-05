@@ -36,8 +36,7 @@ jobs:
 
       - name: Собрать страницу и Excel
         run: python generate_site.py
-- name: Добавить favicon
-    run: cp favicon.svg site/favicon.svg
+
   
       - name: Настроить GitHub Pages
         uses: actions/configure-pages@v5
