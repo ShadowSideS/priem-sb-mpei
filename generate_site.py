@@ -78,8 +78,8 @@ def render_html(summary: pd.DataFrame, updated_at: datetime) -> str:
 <html lang="ru">
 <head>
 <meta name="theme-color" content="#FA8072">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="shortcut icon" href="favicon.svg">
+<link rel="icon" type="image/svg+xml" href="favicon.svg?v=3">
+<link rel="shortcut icon" type="image/svg+xml" href="favicon.svg?v=3">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="refresh" content="300">
